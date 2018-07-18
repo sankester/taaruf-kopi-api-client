@@ -12,12 +12,11 @@
       <!--form input-->
       <v-card>
         <!--title-->
-        <v-toolbar dark color="brown darken-1">
+        <v-toolbar dark color="primary">
           <div class="headline">Form input user</div>
           <v-spacer></v-spacer>
-          <v-btn dark color="teal" round class="hidden-sm-and-down" nuxt to="/admin/user">
-            <v-icon>chevron_left</v-icon>
-            kembali
+          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/user">
+            <v-icon>chevron_left</v-icon> kembali
           </v-btn>
           <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/user')">
             <v-icon>chevron_left</v-icon>
@@ -37,7 +36,7 @@
             </ul>
           </v-alert>
         </v-container>
-        <FormUser @insert="insert($event)" @reset="reset"/>
+        <FormUser ref="formUser" @insert="insert($event)" @reset="reset"/>
       </v-card>
     </v-flex>
   </v-layout>
@@ -106,14 +105,15 @@
         this.$awn.asyncBlock(
           // get data user from API Server
           this.$store.dispatch('saveUser', user).then((res) => {
-            console.log(res.message)
             // show notification
             this.$awn.success('<h4>'+ res.message +'</h4>')
             // disable alert
             this.alert.status = false
+            // reset form
+            this.$refs.formUser.reset();
           }).catch((error) => {
             // default error message
-            let errorMessage = 'Gagal mengambil data';
+            let errorMessage = 'Gagal menambah data';
             // cek response error
             if (error.response) {
               // set 401 error message

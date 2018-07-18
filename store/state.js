@@ -5,7 +5,7 @@ export default  {
   authUser : {
     avatar: null,
     email: null,
-    nama: null,
+    nama : null,
     username: null
   }
 }

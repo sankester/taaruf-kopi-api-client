@@ -28,9 +28,9 @@ export default {
       headers: { 'Authorization': "Bearer " + rootGetters.getToken }
     }
     // get data user from API Server
-    return await this.$axios.$post('/user/', user, tokenHeaders)
+    return await this.$axios.$post('/user', user, tokenHeaders)
   },
-  // gedit user on API server
+  // edit user on API server
   async editUser({ rootGetters}, user){
     // set token additional header
     let tokenHeaders = {
@@ -38,5 +38,14 @@ export default {
     }
     // get data user from API Server
     return await this.$axios.$put('/user/' + user.id, user, tokenHeaders)
+  },
+  // delete user in API server
+  async deleteUser({ rootGetters}, id){
+    //set token additional header
+    let tokenHeaders = {
+      headers: { 'Authorization': "Bearer " + rootGetters.getToken }
+    }
+    //delete data user from API Server
+    return await this.$axios.$delete('/user/' + id,  tokenHeaders)
   }
 }

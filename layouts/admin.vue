@@ -87,10 +87,7 @@
       }
     },
     created(){
-      // init auth user
-      if(this.$store.getters.getAuthUser.nama == null){
-        this.$store.dispatch('getAuthUser')
-      }
+
     },
     mounted () {
       this.onResize()
@@ -101,6 +98,10 @@
         this.drawer = false
       }else{
         this.drawer = true
+      }
+      // init auth user
+      if(this.$store.getters.getAuthUser.nama == null){
+        this.$store.dispatch('getAuthUser')
       }
     },
     beforeDestroy () {

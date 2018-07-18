@@ -4,7 +4,7 @@ import VueAWN from "vue-awesome-notifications"
 Vue.use(VueAWN, {
   position : 'top-right',
   icons: {
-    prefix :'<i class="material-icons">',
+    prefix :'<i class="large material-icons">',
     suffix : '</i>',
     tip : 'help',
     alert : 'error',
@@ -12,6 +12,6 @@ Vue.use(VueAWN, {
     info : 'info',
     success : 'done',
     confirm : 'warning',
-  }
+  },
 })
 

@@ -46,11 +46,14 @@ module.exports = {
   plugins: [
     {src: '~plugins/vee-validate.js', ssr: true},
     {src: '~plugins/vue-awesome-notification.js', ssr: false},
+    {src: '~plugins/confirm-dialog.js', ssr :false},
+    {src: '~plugins/vue2-editor.js', ssr :false},
   ],
   /*
   ** Build configuration
   */
   build: {
+    cssSourceMap: false,
     /*
     ** Run ESLint on save
     */

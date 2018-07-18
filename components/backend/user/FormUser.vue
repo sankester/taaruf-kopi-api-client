@@ -19,7 +19,7 @@
           <v-flex xs12 sm12 md12>
             <v-text-field
               v-model="userData.nama"
-              :validate="this.validateRule.nama"
+              v-validate="this.validateRule.nama"
               label="Nama"
               data-vv-name="nama"
               :error-messages="errors.collect('nama')"
@@ -29,7 +29,7 @@
           <v-flex xs12 sm12 md12>
             <v-text-field
               v-model="userData.username"
-              :validate="this.validateRule.username"
+              v-validate="this.validateRule.username"
               data-vv-name="username"
               :error-messages="errors.collect('username')"
               label="Username"
@@ -39,7 +39,7 @@
           <v-flex xs12 sm12 md12>
             <v-text-field
               v-model="userData.email"
-              :validate="this.validateRule.email"
+              v-validate="this.validateRule.email"
               data-vv-name="email"
               :error-messages="errors.collect('email')"
               label="E-Mail"
@@ -50,7 +50,7 @@
             <v-text-field
               v-model="userData.password"
               ref="password"
-              :validate="this.validateRule.password"
+              v-validate="this.validateRule.password"
               data-vv-name="password"
               :error-messages="errors.collect('password')"
               :type="'password'"
@@ -61,7 +61,7 @@
           <v-flex xs12 sm12 md12>
             <v-text-field
               v-model="userData.password_confirm"
-              :validate="this.validateRule.password_confirm"
+              v-validate="this.validateRule.password_confirm"
               data-vv-name="password_confirm"
               :error-messages="errors.collect('password_confirm')"
               :type="'password'"
@@ -192,7 +192,7 @@ export default {
             var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
             return strongRegex.test(value);
         },
-        getMessage: field => `Password harus mengandung minimal 1 huruf kapital, 1 huruf kecil, 1 nomor`,
+        getMessage: field => `Password harus mengandung minimal 1 huruf kapital, 1 huruf kecil, 1 angka`,
     });
     // custom option vee validate
     const dict = {
@@ -221,7 +221,7 @@ export default {
             }
             this.$emit("edit", userDataEdit)
           }else{
-            this.$emit("insert", userDataEdit)
+            this.$emit("insert", this.userData)
           }
         }
       });

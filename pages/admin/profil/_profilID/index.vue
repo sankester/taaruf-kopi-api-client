@@ -3,7 +3,7 @@
     <v-flex xs12>
       <!--breadcumb-->
       <v-breadcrumbs divider="/">
-        <h1>Manajemen User</h1>
+        <h1>Manajemen Profil</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
           {{ breadcumb.text }}
@@ -13,12 +13,12 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form Edit User</div>
+          <div class="headline">Form Edit Profil</div>
           <v-spacer></v-spacer>
-          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/user">
+          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/profil">
             <v-icon>chevron_left</v-icon> kembali
           </v-btn>
-          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/user')">
+          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/profil')">
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
@@ -36,27 +36,27 @@
             </ul>
           </v-alert>
         </v-container>
-        <FormUser edit :user="loadedUser" @edit="edit($event)" @reset="reset"/>
+        <FormProfil edit :profil="loadedProfil" @edit="edit($event)" @reset="reset"/>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-  import FormUser from "@/components/backend/user/FormUser"
+  import FormProfil from "@/components/backend/profil/FormProfil";
 
   export default {
     name: "edit-user",
     layout: "admin",
     middleware: ["check-auth", "auth"],
-    components: {FormUser},
+    components: {FormProfil},
     asyncData(context){
-      return context.$axios.$get('user/' + context.params.userID ,{
+      return context.$axios.$get('profil/' + context.params.profilID ,{
         headers: { 'Authorization': "Bearer " + context.store.getters.getToken }
       })
         .then( res  => {
           return {
-            loadedUser : {...res.data}
+            loadedProfil : {...res.data}
           }
         })
         .catch(e => {
@@ -75,12 +75,12 @@
             link: "/admin"
           },
           {
-            text: "User",
+            text: "Profil",
             disabled: false,
-            link: "/admin/user"
+            link: "/admin/profil"
           },
           {
-            text: "Edit User",
+            text: "Edit Profil",
             disabled: false
           }
         ],
@@ -99,6 +99,7 @@
       if (process.browser) {
         window.addEventListener("resize", this.onResize, {passive: true});
       }
+
     },
     beforeDestroy() {
       if (process.browser) {
@@ -119,11 +120,11 @@
         this.alert.status = false;
       },
       // edit user
-      edit(user){
+      edit(profil){
         // show waiting asyncronus loading indicator
         this.$awn.asyncBlock(
           // get data user from API Server
-          this.$store.dispatch('editUser', user).then((res) => {
+          this.$store.dispatch('editProfil', profil).then((res) => {
             // show notification
             this.$awn.success('<h4>'+ res.message +'</h4>')
             // disable alert
@@ -155,7 +156,7 @@
       }
     },
     head: {
-      titleTemplate: "Edit User - %s",
+      titleTemplate: "Edit Profil - %s",
       meta: [
         {charset: "utf-8"},
         {name: "viewport", content: "width=device-width, initial-scale=1"},

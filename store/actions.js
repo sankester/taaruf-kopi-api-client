@@ -27,7 +27,7 @@ export default {
         headers: {'Authorization': "Bearer "+ res.access_token}
       }
       // get detail user
-      this.$axios.$get('/authuser/', tokenHeaders).then((resUser) => {
+      this.$axios.$get('/authuser', tokenHeaders).then((resUser) => {
         // commit set auth user
         vuexContext.commit('setUser', resUser.data)
       })

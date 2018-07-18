@@ -17,5 +17,9 @@ export default {
   // set keyword user
   setKeywordUser(state, keyword){
     state.keywordUser = keyword
+  },
+  // delete user
+  deleteUser(state, user){
+    state.listUser.splice(state.listUser.indexOf(user), 1)
   }
 }
