@@ -1,11 +1,11 @@
 export default {
-  // set header user table
+  // set header profil table
   headers: [
     { text: 'Nama Profil', align: 'left', sortable: true, value: 'nama'},
     { text: 'Pembuat', value: 'username', sortable: false },
     { text: 'Actions', value: 'action', align: 'center', sortable: false }
   ],
-  // store list user
+  // store list profil
   list : [],
   // default pagination
   pagination : {
@@ -16,6 +16,6 @@ export default {
     total_pages: 0,
     links: []
   },
-  // keyword search user
+  // keyword search profil
   keyword : ''
 }

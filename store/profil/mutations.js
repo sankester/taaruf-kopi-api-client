@@ -1,5 +1,5 @@
 export default {
-  // set token
+  // set profil
   setProfil(state, list){
     state.list = list
   },

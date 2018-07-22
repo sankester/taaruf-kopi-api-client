@@ -47,7 +47,7 @@ module.exports = {
     {src: '~plugins/vee-validate.js', ssr: true},
     {src: '~plugins/vue-awesome-notification.js', ssr: false},
     {src: '~plugins/confirm-dialog.js', ssr :false},
-    {src: '~plugins/vue2-editor.js', ssr :false},
+    {src: '~plugins/use-component.js', ssr :false},
   ],
   /*
   ** Build configuration

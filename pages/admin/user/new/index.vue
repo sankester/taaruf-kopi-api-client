@@ -126,6 +126,9 @@
                 this.alert.status = true;
                 this.alert.errors = errorData.errors;
                 this.alert.message = errorData.message;
+              } else if(error.response.status == 405){
+                // get error data
+                errorMessage = '<h4>Method tidak diperbolehkan.</h4>'
               } else{
                 // set server error message
                 errorMessage = '<h4>Server sedang jalan-jalan.</h4>'

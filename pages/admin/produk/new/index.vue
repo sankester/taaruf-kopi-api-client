@@ -5,7 +5,7 @@
       <v-breadcrumbs divider="/">
         <h1>Manajemen Profil</h1>
         <v-spacer></v-spacer>
-        <v-breadcrumbs-item class="xs12" exact-active-class="/admin/profil" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
+        <v-breadcrumbs-item class="xs12" exact-active-class="/admin/produk" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
           {{ breadcumb.text }}
         </v-breadcrumbs-item>
       </v-breadcrumbs>
@@ -13,12 +13,12 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form input profil</div>
+          <div class="headline">Form input produk</div>
           <v-spacer></v-spacer>
-          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/profil">
+          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/produk">
             <v-icon>chevron_left</v-icon> kembali
           </v-btn>
-          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/profil')">
+          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/produk')">
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
@@ -36,19 +36,23 @@
             </ul>
           </v-alert>
         </v-container>
-        <FormProfil ref="formProfil" @insert="insert($event)" @reset="reset"/>
+        <FormProduk ref="formProduk" @insert="insert($event)" @reset="reset"/>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
+
 <script>
-  import FormProfil from "@/components/backend/profil/FormProfil";
+  // import component
+  import FormProduk from "@/components/backend/produk/FormProduk";
 
   export default {
-    name: "new-profil",
+    name: "new-produk",
     layout: "admin",
     middleware: ["check-auth", "auth"],
-    components: {FormProfil},
+    components: {
+      FormProduk
+    },
     data() {
       return {
         // mobile status
@@ -63,10 +67,10 @@
           {
             text: "Profil",
             disabled: false,
-            link: "/admin/profil"
+            link: "/admin/produk"
           },
           {
-            text: "Tambah Profil",
+            text: "Tambah Produk",
             disabled: false
           }
         ],
@@ -100,17 +104,17 @@
           this.isMobile = window.innerWidth < 600;
         }
       },
-      insert(profil) {
+      insert(produk) {
         // show waiting asyncronus loading indicator
         this.$awn.asyncBlock(
           // get data user from API Server
-          this.$store.dispatch('saveProfil', profil).then((res) => {
+          this.$store.dispatch('saveProduk', produk).then((res) => {
             // show notification
             this.$awn.success('<h4>'+ res.message +'</h4>')
             // disable alert
             this.alert.status = false
             // reset form
-            this.$refs.formProfil.reset();
+            this.$refs.formProduk.reset();
           }).catch((error) => {
             // default error message
             let errorMessage = 'Gagal menambah data';
@@ -144,7 +148,7 @@
       }
     },
     head: {
-      titleTemplate: "Tambah Profil - %s",
+      titleTemplate: "Tambah Produk - %s",
       meta: [
         {charset: "utf-8"},
         {name: "viewport", content: "width=device-width, initial-scale=1"},
@@ -155,8 +159,9 @@
       // set custom
       this.$validator.localize("id", this.dictionary);
     }
-  };
+  }
 </script>
 
 <style scoped>
+
 </style>
