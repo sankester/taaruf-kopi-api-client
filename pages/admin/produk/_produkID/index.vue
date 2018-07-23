@@ -13,7 +13,7 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form Edit Produk</div>
+          <v-toolbar-title class="white--text">Form Edit Produk</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/produk">
             <v-icon>chevron_left</v-icon>
@@ -23,7 +23,7 @@
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-container>
+        <v-container v-if="alert.status">
           <v-alert dismissible v-model="alert.status" :type="alert.type">
             {{ alert.message }}
             <ul>
@@ -62,7 +62,7 @@
           let resFile = res.data.files.data
           // reformate produk
           let produk =  {
-			  id : resData.id,
+			        id : resData.id,
               nama_produk: resData.nama_produk,
               deskripsi_produk:  resData.deskripsi_produk,
               stok :  resData.stok,

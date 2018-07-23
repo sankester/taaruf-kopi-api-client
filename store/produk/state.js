@@ -5,6 +5,7 @@ export default {
     { text: 'Stok', value: 'stok', sortable: false },
     { text: 'Diskon', value: 'diskon', sortable: false },
     { text: 'Harga', value: 'harga', align: 'center', sortable: false },
+    { text: 'Status Publikasi', value: 'status', align: 'center', sortable: false },
     { text: 'Action',  align: 'center', sortable: false }
   ],
   // store list produk

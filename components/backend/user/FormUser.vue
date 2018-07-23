@@ -77,7 +77,7 @@
           </v-flex>
         </v-flex>
       </v-layout>
-      <v-flex xs12 sm12 md12 justify-end align-end class="layout">
+      <v-flex xs12 sm12 md12 justify-end align-end class="layout mt-2">
         <v-spacer></v-spacer>
         <v-btn @click="reset">
           <v-icon class="mr-2">settings_backup_restore</v-icon> Reset

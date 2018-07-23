@@ -13,7 +13,7 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form Edit Acara</div>
+          <v-toolbar-title class="white--text">Form Edit Acara</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/acara">
             <v-icon>chevron_left</v-icon>
@@ -75,7 +75,7 @@
           // reformate and get data files
           resFile.forEach(function (element) {
             files.push({
-              id : element.id ,
+              id : element.file_id ,
               image : element.file_path +'/'+ element.file_name ,
               status : false
             })

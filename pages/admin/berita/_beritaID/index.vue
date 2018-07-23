@@ -3,9 +3,9 @@
     <v-flex xs12>
       <!--breadcumb-->
       <v-breadcrumbs divider="/">
-        <h1>Manajemen Profil</h1>
+        <h1>Manajemen Berita</h1>
         <v-spacer></v-spacer>
-        <v-breadcrumbs-item class="xs12" exact-active-class="/admin/profil" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
+        <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
           {{ breadcumb.text }}
         </v-breadcrumbs-item>
       </v-breadcrumbs>
@@ -13,16 +13,17 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <v-toolbar-title class="white--text">Form Tambah Profil</v-toolbar-title>
+          <v-toolbar-title class="white--text">Form Edit Berita</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/profil">
-            <v-icon>chevron_left</v-icon> kembali
+          <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/berita">
+            <v-icon>chevron_left</v-icon>
+            kembali
           </v-btn>
-          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/profil')">
+          <v-btn icon class="hidden-md-and-up" @click="$router.push('/admin/berita')">
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-container v-if="alert.status">
+        <v-container>
           <v-alert dismissible v-model="alert.status" :type="alert.type">
             {{ alert.message }}
             <ul>
@@ -36,19 +37,56 @@
             </ul>
           </v-alert>
         </v-container>
-        <FormProfil ref="formProfil" @insert="insert($event)" @reset="reset"/>
+        <FormBerita edit :fileAttach="loadedFiles" :berita="loadedBerita" @edit="edit($event)" @reset="reset"/>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
+
 <script>
-  import FormProfil from "@/components/backend/profil/FormProfil";
+  // import component
+  import FormBerita from "@/components/backend/berita/FormBerita";
 
   export default {
-    name: "new-profil",
+    name: "edit-berita",
     layout: "admin",
     middleware: ["check-auth", "auth"],
-    components: {FormProfil},
+    components: {FormBerita},
+    asyncData(context) {
+      return context.$axios.$get('berita/' + context.params.beritaID + '?include=files' , {
+        headers: {'Authorization': "Bearer " + context.store.getters.getToken}
+      })
+        .then(res => {
+          // grt data respose
+          let resData = res.data
+          let resFile = res.data.files.data
+          // reformate berita
+          let berita =  {
+            id : resData.id,
+            nama_berita: resData.nama_berita,
+            isi_berita:  resData.isi_berita,
+            publish_st :  resData.publish_st
+          }
+          // declare variable
+          let files = []
+          // reformate and get data files
+          resFile.forEach(function (element) {
+            files.push({
+              id : element.file_id ,
+              image : element.file_path +'/'+ element.file_name ,
+              status : false
+            })
+          })
+          // return data
+          return {
+            loadedBerita: berita,
+            loadedFiles : files
+          }
+        })
+        .catch(e => {
+          context.error(e)
+        })
+    },
     data() {
       return {
         // mobile status
@@ -61,12 +99,12 @@
             link: "/admin"
           },
           {
-            text: "Profil",
+            text: "Berita",
             disabled: false,
-            link: "/admin/profil"
+            link: "/admin/berita"
           },
           {
-            text: "Tambah Profil",
+            text: "Edit Berita",
             disabled: false
           }
         ],
@@ -100,20 +138,23 @@
           this.isMobile = window.innerWidth < 600;
         }
       },
-      insert(profil) {
+      // reset button
+      reset() {
+        this.alert.status = false;
+      },
+      // edit user
+      edit(berita) {
         // show waiting asyncronus loading indicator
         this.$awn.asyncBlock(
           // get data user from API Server
-          this.$store.dispatch('saveProfil', profil).then((res) => {
+          this.$store.dispatch('editBerita', berita).then((res) => {
             // show notification
             this.$awn.success('<h4>'+ res.message +'</h4>')
             // disable alert
             this.alert.status = false
-            // reset form
-            this.$refs.formProfil.reset();
           }).catch((error) => {
             // default error message
-            let errorMessage = 'Gagal menambah data';
+            let errorMessage = 'Gagal mengambil data';
             // cek response error
             if (error.response) {
               // set 401 error message
@@ -138,25 +179,19 @@
             this.$awn.alert(errorMessage)
           })
         )
-      },
-      reset(){
-        this.alert.status = false
       }
     },
     head: {
-      titleTemplate: "Tambah Profil - %s",
+      titleTemplate: "Edit Berita - %s",
       meta: [
         {charset: "utf-8"},
         {name: "viewport", content: "width=device-width, initial-scale=1"},
         {hid: "description", name: "description", content: "Meta description"}
       ]
-    },
-    created() {
-      // set custom
-      this.$validator.localize("id", this.dictionary);
     }
-  };
+  }
 </script>
 
 <style scoped>
+
 </style>

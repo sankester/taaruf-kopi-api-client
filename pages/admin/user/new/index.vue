@@ -13,7 +13,7 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form input user</div>
+          <v-toolbar-title class="white--text">Form Tambah User</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/user">
             <v-icon>chevron_left</v-icon> kembali
@@ -22,7 +22,7 @@
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-container>
+        <v-container v-if="alert.status">
           <v-alert dismissible v-model="alert.status" :type="alert.type">
             {{ alert.message }}
             <ul>

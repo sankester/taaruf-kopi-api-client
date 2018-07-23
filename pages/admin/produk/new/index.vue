@@ -3,7 +3,7 @@
     <v-flex xs12>
       <!--breadcumb-->
       <v-breadcrumbs divider="/">
-        <h1>Manajemen Profil</h1>
+        <h1>Manajemen Produk</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item class="xs12" exact-active-class="/admin/produk" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
           {{ breadcumb.text }}
@@ -13,7 +13,7 @@
       <v-card>
         <!--title-->
         <v-toolbar dark color="primary">
-          <div class="headline">Form input produk</div>
+          <v-toolbar-title class="white--text">Form Tambah Produk</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn flat ripple dark outline round class="hidden-sm-and-down" nuxt to="/admin/produk">
             <v-icon>chevron_left</v-icon> kembali
@@ -22,7 +22,7 @@
             <v-icon>chevron_left</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-container>
+        <v-container v-if="alert.status">
           <v-alert dismissible v-model="alert.status" :type="alert.type">
             {{ alert.message }}
             <ul>
@@ -65,7 +65,7 @@
             link: "/admin"
           },
           {
-            text: "Profil",
+            text: "Produk",
             disabled: false,
             link: "/admin/produk"
           },

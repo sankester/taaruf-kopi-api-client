@@ -113,7 +113,7 @@
         </v-flex>
       </v-layout>
       <v-layout>
-        <v-flex md12 sm12 xs12 class="d-inline-block">
+        <v-flex md12 sm12 xs12 class="d-inline-block mb-2">
           <label aria-hidden="true" class="v-label">Gambar Acara</label>
         </v-flex>
       </v-layout>
@@ -130,16 +130,16 @@
             </v-card-media>
           </v-card>
         </v-flex>
-        <v-flex md3 sm4 xs12 style="min-height: 150px;border: 1px dashed #dbe1ec">
+        <v-flex md3 sm4 xs12 style="min-height: 150px;border: 2px dashed #00897B;background:rgba(244, 244, 246, 0.47);" >
           <v-card-actions class="layout align-center justify-center fill-height">
-            <v-btn fab outline color="#dbe1ec" @click="onPickFile">
+            <v-btn fab outline color="primary" @click="onPickFile">
               <v-icon>add</v-icon>
             </v-btn>
             <input type="file" style="display: none" ref="fileInput" accept="image/*" @change="onFilePicked">
           </v-card-actions>
         </v-flex>
       </v-layout>
-      <v-flex xs12 sm12 md12 justify-end align-end class="layout">
+      <v-flex xs12 sm12 md12 justify-end align-end class="layout mt-2">
         <v-spacer></v-spacer>
         <v-btn @click="reset">
           <v-icon class="mr-2">settings_backup_restore</v-icon> Reset

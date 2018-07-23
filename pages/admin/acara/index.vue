@@ -53,7 +53,7 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs6 sm6 md4>
-                <v-btn fab dark color="primary" :small="isMobile" @click="search">
+                <v-btn fab dark color="success" :small="isMobile" @click="search">
                   <v-icon>search</v-icon>
                 </v-btn>
                 <v-btn fab :small="isMobile" @click="resetSearch">
