@@ -191,7 +191,17 @@
               // set 401 error message
               if (error.response.status == 401) {
                 errorMessage = "<h4>Anda tidak mempunyai akses.</h4>";
-              } else {
+              } else if(error.response.status == 422){
+                // get error data
+                let errorData = error.response.data.error
+                // set error data in component
+                this.alert.status = true;
+                this.alert.errors = errorData.errors;
+                this.alert.message = errorData.message;
+              } else if(error.response.status == 405){
+                // get error data
+                errorMessage = '<h4>Method tidak diperbolehkan.</h4>'
+              } else{
                 // set server error message
                 errorMessage = "<h4>Server sedang jalan-jalan.</h4>";
               }

@@ -4,17 +4,19 @@
     <v-data-table :headers="headers" :items="list" hide-actions class="elevation-1 mt-3">
       <!--looping data-->
       <template slot="items" slot-scope="props">
-        <td>{{ props.item.nama_produk }}</td>
-        <td>{{ props.item.stok }}</td>
-        <td>{{ props.item.diskon }}</td>
-        <td class="text-md-right" v-text="formatPrice(props.item.harga)">
+        <td>{{ props.item.nama_acara }}</td>
+        <td>{{ props.item.tanggal_acara_label }}</td>
+        <td align="center">
+          <v-btn flat :class="(props.item.publish_st) ? 'success--text' : 'error--text'" small >
+            <v-icon v-text="(props.item.publish_st) ? 'check' : 'clear'"></v-icon> &nbsp; {{ (props.item.publish_st) ? 'Dipublist' : 'Belum Dipublist'}}
+          </v-btn>
         </td>
         <td class="justify-center align-center layout px-0">
-          <v-btn depressed fab small color="info" class="mr-1" nuxt :to="'produk/' + props.item.id">
+          <v-btn depressed fab small color="info" class="mr-1" nuxt :to="'acara/' + props.item.id">
             <v-icon small dark>edit</v-icon>
           </v-btn>
           <v-btn icon fab small color="error" >
-            <v-icon small dark @click="delete_produk(props.item)">delete</v-icon>
+            <v-icon small dark @click="delete_acara(props.item)">delete</v-icon>
           </v-btn>
         </td>
       </template>
@@ -28,7 +30,7 @@
               icon="info"
               outline
             >
-              Data belum tersedia, klik tombol tambah produk untuk menambah data atau klik tombol load data jika ingin mengambil data terbaru dari server.
+              Data belum tersedia, klik tombol tambah acara untuk menambah data atau klik tombol load data jika ingin mengambil data terbaru dari server.
             </v-alert>
           </v-flex>
           <v-flex md12 lg12 xs12 sm12  align-center justify-center class="layout">
@@ -45,46 +47,42 @@
 </template>
 
 <script>
-    export default {
-      name: "ProdukList",
-      props: {
-        headers: {
-          type: Array,
-          required: true
-        },
-        list: {
-          type: Array,
-          required: true
-        },
-        loading : {
-          type : Boolean,
-          default : false,
-          required : false
-        },
-        pagination : {
-          type : Object,
-          required : true
-        }
+  export default {
+    name: "AcaraList",
+    props: {
+      headers: {
+        type: Array,
+        required: true
       },
-      methods : {
-        // emmit reload function
-        reload(){
-          this.$emit('reload');
-        },
-        // emmit load more event
-        loadMore(url){
-          this.$emit('loadMore',url)
-        },
-        // emit delete user
-        delete_produk(data){
-          this.$emit('delete', data)
-        },
-        formatPrice(value) {
-          let val = (value/1).toFixed(2).replace('.', ',')
-          return 'Rp ' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-        }
+      list: {
+        type: Array,
+        required: true
       },
-    }
+      loading : {
+        type : Boolean,
+        default : false,
+        required : false
+      },
+      pagination : {
+        type : Object,
+        required : true
+      }
+    },
+    methods : {
+      // emmit reload function
+      reload(){
+        this.$emit('reload');
+      },
+      // emmit load more event
+      loadMore(url){
+        this.$emit('loadMore',url)
+      },
+      // emit delete user
+      delete_acara(data){
+        this.$emit('delete', data)
+      }
+    },
+  }
 </script>
 
 <style scoped>

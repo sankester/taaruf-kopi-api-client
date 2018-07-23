@@ -16,9 +16,21 @@
         </td>
       </template>
       <!--if empty data-->
-      <template slot="no-data" class="justify-center align-center layout px-0">
-        <v-layout align-center justify-center justify-space-around fill-height>
-          <v-btn color="primary"  @click="reload" class="ma-5">load data</v-btn>
+      <template slot="no-data" class="justify-center align-center layout">
+        <v-layout align-center justify-center fill-height row wrap class="py-2">
+          <v-flex md12 lg12 xs12 sm12>
+            <v-alert
+              :value="true"
+              color="info"
+              icon="info"
+              outline
+            >
+              Data belum tersedia, klik tombol tambah profil untuk menambah data atau klik tombol load data jika ingin mengambil data terbaru dari server.
+            </v-alert>
+          </v-flex>
+          <v-flex md12 lg12 xs12 sm12  align-center justify-center class="layout">
+            <v-btn color="secondary"  @click="reload"><v-icon class="mr-1">refresh</v-icon>load data</v-btn>
+          </v-flex>
         </v-layout>
       </template>
     </v-data-table>
