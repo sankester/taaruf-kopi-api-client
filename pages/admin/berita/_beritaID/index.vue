@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/">
+      <v-breadcrumbs divider="/" class="px-1">
         <h1>Manajemen Berita</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
@@ -46,46 +46,44 @@
 <script>
   // import component
   import FormBerita from "@/components/backend/berita/FormBerita";
+  import axios from 'axios'
 
   export default {
     name: "edit-berita",
     layout: "admin",
     middleware: ["check-auth", "auth"],
     components: {FormBerita},
-    asyncData(context) {
-      return context.$axios.$get('berita/' + context.params.beritaID + '?include=files' , {
-        headers: {'Authorization': "Bearer " + context.store.getters.getToken}
+    async asyncData({params, store}) {
+      const res = await axios.get( process.env.BASE_URL + 'berita/' + params.beritaID + '?include=files' , {
+        headers: {'Authorization': "Bearer " + store.getters.getToken}
+      }).then(response => {
+         return response.data
       })
-        .then(res => {
-          // grt data respose
-          let resData = res.data
-          let resFile = res.data.files.data
-          // reformate berita
-          let berita =  {
-            id : resData.id,
-            nama_berita: resData.nama_berita,
-            isi_berita:  resData.isi_berita,
-            publish_st :  resData.publish_st
-          }
-          // declare variable
-          let files = []
-          // reformate and get data files
-          resFile.forEach(function (element) {
-            files.push({
-              id : element.file_id ,
-              image : element.file_path +'/'+ element.file_name ,
-              status : false
-            })
-          })
-          // return data
-          return {
-            loadedBerita: berita,
-            loadedFiles : files
-          }
+      // get data respose
+      let resData = res.data
+      let resFile = res.data.files.data
+      // reformate berita
+      let berita =  {
+        id : resData.id,
+        nama_berita: resData.nama_berita,
+        isi_berita:  resData.isi_berita,
+        publish_st :  resData.publish_st
+      }
+      // declare variable
+      let files = []
+      // reformate and get data files
+      resFile.forEach(function (element) {
+        files.push({
+          id : element.file_id ,
+          image : element.file_path +'/'+ element.file_name ,
+          status : false
         })
-        .catch(e => {
-          context.error(e)
-        })
+      })
+      // return data
+      return {
+        loadedBerita: berita,
+        loadedFiles : files
+      }
     },
     data() {
       return {

@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/">
+      <v-breadcrumbs divider="/" class="px-1">
         <h1>Manajemen Profil</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item class="xs12" exact-active-class="/admin/profil" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">

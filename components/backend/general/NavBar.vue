@@ -21,7 +21,7 @@
           </v-avatar>
         </v-btn>
         <v-list>
-          <v-list-tile @click="">
+          <v-list-tile exact nuxt to="/admin/auth/profile">
             <v-list-tile-action>
               <v-icon>person</v-icon>
             </v-list-tile-action>
@@ -48,7 +48,7 @@
           </v-list-tile-action>
           <v-list-tile-title>Pemberitahuan</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile @click="">
+        <v-list-tile exact nuxt to="/admin/auth/profile">
           <v-list-tile-action>
             <v-icon>person</v-icon>
           </v-list-tile-action>

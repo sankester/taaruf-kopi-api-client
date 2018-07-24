@@ -79,7 +79,7 @@
         </v-flex>
       </v-layout>
       <v-layout>
-        <v-flex md3 sm4 xs12 class="mr-1" v-for="(file,index) in files" v-bind:key="index">
+        <v-flex md3 sm4 xs12 class="mr-2" v-for="(file,index) in files" v-bind:key="index">
           <v-card>
             <v-card-media
               :src="file.image"

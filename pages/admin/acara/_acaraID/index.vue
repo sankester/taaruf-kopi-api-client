@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/">
+      <v-breadcrumbs divider="/" class="px-1">
         <h1>Manajemen Acara</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
@@ -46,49 +46,47 @@
 <script>
   // import component
   import FormAcara from "@/components/backend/acara/FormAcara";
+  import axios from 'axios'
 
   export default {
     name: "edit-acara",
     layout: "admin",
     middleware: ["check-auth", "auth"],
     components: {FormAcara},
-    asyncData(context) {
-      return context.$axios.$get('acara/' + context.params.acaraID + '?include=files' , {
-        headers: {'Authorization': "Bearer " + context.store.getters.getToken}
+    async asyncData({store, params}) {
+      const res = await axios.get(process.env.BASE_URL + 'acara/' + params.acaraID + '?include=files', {
+        headers: {'Authorization': "Bearer " + store.getters.getToken}
+      }).then((response) => {
+        return response.data
       })
-        .then(res => {
-          // grt data respose
-          let resData = res.data
-          let resFile = res.data.files.data
-          // reformate acara
-          let acara =  {
-            id : resData.id,
-            nama_acara: resData.nama_acara,
-            tanggal_acara: resData.tanggal_acara,
-            jam_acara: resData.jam_acara,
-            tempat_acara: resData.tempat_acara,
-            deskripsi_acara:  resData.deskripsi_acara,
-            publish_st :  resData.publish_st
-          }
-          // declare variable
-          let files = []
-          // reformate and get data files
-          resFile.forEach(function (element) {
-            files.push({
-              id : element.file_id ,
-              image : element.file_path +'/'+ element.file_name ,
-              status : false
-            })
-          })
-          // return data
-          return {
-            loadedAcara: acara,
-            loadedFiles : files
-          }
+      // grt data respose
+      let resData = res.data
+      let resFile = res.data.files.data
+      // reformate acara
+      let acara = {
+        id: resData.id,
+        nama_acara: resData.nama_acara,
+        tanggal_acara: resData.tanggal_acara,
+        jam_acara: resData.jam_acara,
+        tempat_acara: resData.tempat_acara,
+        deskripsi_acara: resData.deskripsi_acara,
+        publish_st: resData.publish_st
+      }
+      // declare variable
+      let files = []
+      // reformate and get data files
+      resFile.forEach(function (element) {
+        files.push({
+          id: element.file_id,
+          image: element.file_path + '/' + element.file_name,
+          status: false
         })
-        .catch(e => {
-          context.error(e)
-        })
+      })
+      // return data
+      return {
+        loadedAcara: acara,
+        loadedFiles: files
+      }
     },
     data() {
       return {

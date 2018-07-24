@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/">
+      <v-breadcrumbs divider="/" class="px-1">
         <h1>Manajemen User</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
@@ -44,24 +44,22 @@
 
 <script>
   import FormUser from "@/components/backend/user/FormUser"
+  import axios from 'axios'
 
   export default {
     name: "edit-user",
     layout: "admin",
     middleware: ["check-auth", "auth"],
     components: {FormUser},
-    asyncData(context){
-      return context.$axios.$get('user/' + context.params.userID ,{
-        headers: { 'Authorization': "Bearer " + context.store.getters.getToken }
+    async asyncData({store , params}){
+      const res  = await axios.get( process.env.BASE_URL +'user/' + params.userID ,{
+        headers: { 'Authorization': "Bearer " + store.getters.getToken }
+      }).then( respose  => {
+         return respose.data
       })
-        .then( res  => {
-          return {
-            loadedUser : {...res.data}
-          }
-        })
-        .catch(e => {
-          context.error(e)
-        })
+      return {
+        loadedUser : res.data
+      }
     },
     data() {
       return {

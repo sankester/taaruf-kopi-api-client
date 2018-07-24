@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/">
+      <v-breadcrumbs divider="/" class="px-1">
         <h1>Manajemen Profil</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">
@@ -45,24 +45,22 @@
 <script>
   // import component
   import FormProfil from "@/components/backend/profil/FormProfil";
+  import axios from 'axios'
 
   export default {
     name: "edit-user",
     layout: "admin",
     middleware: ["check-auth", "auth"],
     components: {FormProfil},
-    asyncData(context){
-      return context.$axios.$get('profil/' + context.params.profilID ,{
-        headers: { 'Authorization': "Bearer " + context.store.getters.getToken }
+    async asyncData({params , store}){
+      const res = await axios.get(process.env.BASE_URL + 'profil/' + params.profilID ,{
+        headers: { 'Authorization': "Bearer " + store.getters.getToken }
+      }).then( response  => {
+          return response.data
       })
-        .then( res  => {
-          return {
-            loadedProfil : {...res.data}
-          }
-        })
-        .catch(e => {
-          context.error(e)
-        })
+      return {
+        loadedProfil : res.data
+      }
     },
     data() {
       return {
