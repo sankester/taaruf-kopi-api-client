@@ -7,5 +7,18 @@ export default  {
     email: null,
     nama : null,
     username: null
-  }
+  },
+  // welcome message status
+  welcomeMessage : false,
+  // list recent login
+  recentLogin : [],
+  // default recent pagination
+  recentLoginPagination : {
+    total: 0,
+    count: 0,
+    per_page: 0,
+    current_page: 0,
+    total_pages: 0,
+    links: []
+  },
 }

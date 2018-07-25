@@ -11,4 +11,23 @@ export default {
   setUser(state, authUser){
     state.authUser = authUser
   },
+  // set welcome message
+  setWelcomeMessage(state, status){
+    state.welcomeMessage = status
+  },
+  // set recent login
+  setRecentLogin(state, recentLogin){
+    state.recentLogin = recentLogin
+  },
+  // update list
+  updateRecentLogin(state, list){
+    // loop
+    list.forEach(function(element) {
+      state.recentLogin.push(element)
+    });
+  },
+  // set last page
+  setLastRecentLoginPagination(state, pagination){
+    state.recentLoginPagination = pagination
+  },
 }

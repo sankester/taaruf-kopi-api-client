@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/" class="px-1">
+      <v-breadcrumbs divider="/" class="px-1 pt-0">
         <h1>Manajemen Produk</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item class="xs12" exact-active-class="/admin/produk" exact replace v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">

@@ -27,12 +27,13 @@ export default {
         headers: {'Authorization': "Bearer "+ res.access_token}
       }
       // get detail user
-      this.$axios.$get('/authuser', tokenHeaders).then((resUser) => {
+      this.$axios.$get('/oauth/data', tokenHeaders).then((resUser) => {
         // commit set auth user
         vuexContext.commit('setUser', resUser.data)
       })
     })
   },
+  // get auth data user
   async getAuthUser(vuexContext){
     if(vuexContext.state.token !=  null){
       if(vuexContext.state.authUser.nama == null || vuexContext.state.authUser.email == "" ){
@@ -41,7 +42,7 @@ export default {
           headers: {'Authorization': "Bearer "+ vuexContext.state.token}
         }
         // get detail user
-        await this.$axios.$get('/authuser', tokenHeaders).then((resUser) => {
+        await this.$axios.$get('/oauth/data', tokenHeaders).then((resUser) => {
           // commit set auth user
           vuexContext.commit('setUser', resUser.data)
         })
@@ -49,7 +50,12 @@ export default {
     }
   },
   // set logout action
-  logout(vuexContext){
+  logout(vuexContext, revoke){
+    if(revoke){
+      this.$axios.$delete('oauth/logout',{
+        headers: { 'Authorization': "Bearer "+ vuexContext.state.token }
+      })
+    }
     vuexContext.commit('clearToken')
     Cookie.remove('taToken')
     Cookie.remove('taTokenExpiration')
@@ -85,12 +91,44 @@ export default {
     }
     // cek expiration date token
     if(new Date().getTime() > + expirationDate || !token){
-      console.log('no token or invalid ')
       // commit clear token
-      vuexContext.dispatch('logout')
+      vuexContext.dispatch('logout', false)
       return
     }
     // conmmit set token
     vuexContext.commit('setToken', token)
   },
+  // get rrecent login
+  async getRecentLogin(vuexContext){
+    // set token additional header
+    let tokenHeaders = {
+      headers: {'Authorization': "Bearer "+ vuexContext.state.token}
+    }
+    // send data to API server
+    await this.$axios.$get('oauth/recent', tokenHeaders).then((res) => {
+      // commit list recent into vuex
+      vuexContext.commit('setRecentLogin', res.data)
+      vuexContext.commit('setLastRecentLoginPagination', res.meta.pagination)
+    })
+  },
+  async loadMoreRecentLogin(vuexContext, url) {
+    // set token additional header
+    let tokenHeaders = {
+      headers: { 'Authorization': "Bearer " + vuexContext.state.token}
+    }
+    // get data user from API Server
+    return await this.$axios.$get(url, tokenHeaders)
+  },
+  // revoke token
+  async revokeToken(vuexContext, tokenID){
+    // set token additional header
+    let tokenHeaders = {
+      headers: {'Authorization': "Bearer "+ vuexContext.state.token}
+    }
+    // send data to API server
+    await this.$axios.$get('oauth/revoke/' + tokenID, tokenHeaders).then((res) => {
+      // commit list recent into vuex
+      vuexContext.commit('setRevokeToken', tokenID)
+    })
+  }
 }

@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12>
       <!--breadcumb-->
-      <v-breadcrumbs divider="/" class="px-1">
+      <v-breadcrumbs divider="/" class="px-1 pt-0">
         <h1>Manajemen Berita</h1>
         <v-spacer></v-spacer>
         <v-breadcrumbs-item nuxt exact v-for="breadcumb in breadcumbs" :key="breadcumb.text" :disabled="breadcumb.disabled" :to="breadcumb.link">

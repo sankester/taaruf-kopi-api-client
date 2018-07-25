@@ -60,7 +60,7 @@
       // logout from admin area
       logout(){
         // clear data login
-        this.$store.dispatch('logout')
+        this.$store.dispatch('logout', true)
         // redirect
         this.$router.push('/admin/auth')
       },

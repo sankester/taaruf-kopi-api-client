@@ -81,6 +81,8 @@
                 username : this.username,
                 password : this.password
               }).then(() => {
+                // set login welcome status
+                this.$store.commit('setWelcomeMessage', true)
                 // redirect
                 this.$router.push('/admin')
               }).catch((error) => {
