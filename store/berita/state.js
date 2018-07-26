@@ -1,10 +1,10 @@
 export default {
   // set header berita table
   headers: [
-    { text: 'Judul Berita', align: 'left', sortable: true, value: 'judul'},
-    { text: 'Pembuat', value: 'name', sortable: false },
-    { text: 'Status Publikasi', value: 'status', align: 'center', sortable: false },
-    { text: 'Actions', value: 'action', align: 'center', sortable: false }
+    { text: 'Judul Berita', align: 'left', sortable: true, value: 'judul', width:"52%"},
+    { text: 'Pembuat', value: 'name', sortable: false, width:"20%" },
+    { text: 'Status Publikasi', value: 'status', align: 'center', sortable: false, width:"10%" },
+    { text: 'Actions', value: 'action', align: 'center', sortable: false, width:"18%" }
   ],
   // store list berita
   list : [],

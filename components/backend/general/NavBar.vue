@@ -1,6 +1,6 @@
 <template>
   <!--toolbar component-->
-  <v-toolbar color="brown darken-1" dark :clipped-left="clipped" fixed app>
+  <v-toolbar color="brown darken-1" dark :clipped-left="clipped" fixed app height="50px">
     <v-toolbar-side-icon @click="setDrawer"></v-toolbar-side-icon>
     <v-spacer class="hidden-md-and-up"></v-spacer>
     <v-toolbar-title>
@@ -101,7 +101,7 @@
 <style scoped>
   /*custom top logo */
   .top--logo {
-    width: 175px !important;
-    height: 50px !important;
+    width: 150px !important;
+    height: 40px !important;
   }
 </style>

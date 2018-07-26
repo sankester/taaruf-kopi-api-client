@@ -12,10 +12,10 @@
           </v-btn>
         </td>
         <td class="justify-center align-center layout px-0">
-          <v-btn depressed fab small color="info" class="mr-1" nuxt :to="'acara/' + props.item.id">
+          <v-btn flat icon small  small color="info" nuxt :to="'acara/' + props.item.id">
             <v-icon small dark>edit</v-icon>
           </v-btn>
-          <v-btn icon fab small color="error" >
+          <v-btn flat icon small color="error" >
             <v-icon small dark @click="delete_acara(props.item)">delete</v-icon>
           </v-btn>
         </td>

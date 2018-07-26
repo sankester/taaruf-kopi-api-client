@@ -130,5 +130,16 @@ export default {
       // commit list recent into vuex
       vuexContext.commit('setRevokeToken', tokenID)
     })
+  },
+  async getDashboardData(){
+    // set token additional header
+    let tokenHeaders = {
+      headers: {'Authorization': "Bearer "+ vuexContext.state.token}
+    }
+    // send data to API server
+    await this.$axios.$get('dashboard', tokenHeaders).then((res) => {
+      // commit list recent into vuex
+      vuexContext.commit('setDasboardData', res)
+    })
   }
 }

@@ -19,7 +19,12 @@ export default  {
   getListRecent(state){
     return state.recentLogin
   },
+  // get recent pagination
   getListRecentPagination(state){
     return state.recentLoginPagination
+  },
+  // get data dashboard
+  getDataDashboard(state){
+    return state.dashboardData
   }
 }

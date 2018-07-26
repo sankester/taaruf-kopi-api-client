@@ -30,4 +30,8 @@ export default {
   setLastRecentLoginPagination(state, pagination){
     state.recentLoginPagination = pagination
   },
+  // set dashboard data
+  setDasboardData(state, data){
+    state.dashboardData = data
+  }
 }

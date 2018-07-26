@@ -21,4 +21,6 @@ export default  {
     total_pages: 0,
     links: []
   },
+  // dashboard data
+  dashboardData : []
 }

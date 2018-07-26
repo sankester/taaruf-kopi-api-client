@@ -11,11 +11,11 @@
             <v-icon v-text="(props.item.publish_st) ? 'check' : 'clear'"></v-icon> &nbsp; {{ (props.item.publish_st) ? 'Dipublist' : 'Belum Dipublist'}}
           </v-btn>
         </td>
-        <td class="justify-center align-center layout px-0">
-          <v-btn depressed fab small color="info" class="mr-1" nuxt :to="'berita/' + props.item.id">
+        <td class="text-xs-right">
+          <v-btn flat icon small color="info" nuxt :to="'berita/' + props.item.id">
             <v-icon small dark>edit</v-icon>
           </v-btn>
-          <v-btn icon fab small color="error" >
+          <v-btn flat icon small color="error" >
             <v-icon small dark @click="delete_berita(props.item)">delete</v-icon>
           </v-btn>
         </td>
