@@ -22,6 +22,8 @@
     "vee-validate": "^2.1.0-beta.6",
     "vue-autonumeric": "^1.2.5",
     "vue-awesome-notifications": "^2.2.9",
+    "vue-material-design-icons": "^1.6.0",
+    "vue-truncate-filter": "^1.1.7",
     "vue2-editor": "^2.5.0",
     "vuetify": "^1.1.6",
     "vuetify-vuejs-confirmdialog": "0.0.15"

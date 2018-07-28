@@ -26,5 +26,15 @@ export default  {
   // get data dashboard
   getDataDashboard(state){
     return state.dashboardData
+  },
+  // get transparent status
+  getTransparentNavbar(state){
+    return state.transparent
+  },
+  getNavbarClassColor(state){
+    return state.navbarClassColor
+  },
+  getIsHome(state){
+    return state.isHome
   }
 }

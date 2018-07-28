@@ -33,5 +33,17 @@ export default {
   // set dashboard data
   setDasboardData(state, data){
     state.dashboardData = data
+  },
+  // set transparent
+  setTransparent(state , status){
+    state.transparent = status
+  },
+  // set navbar class color
+  setNavbarClasscColor(state, color){
+    state.navbarClassColor = color
+  },
+  // set is home
+  setIsHome(state, status){
+    state.isHome = status
   }
 }

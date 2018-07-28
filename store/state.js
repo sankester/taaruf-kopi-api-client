@@ -22,5 +22,11 @@ export default  {
     links: []
   },
   // dashboard data
-  dashboardData : []
+  dashboardData : [],
+  // is transparent navbar website
+  transparent : false,
+  // nav bar class color
+  navbarClassColor : '',
+  // set is home
+  isHome : false
 }

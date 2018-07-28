@@ -117,8 +117,8 @@
           <label aria-hidden="true" class="v-label">Gambar Acara</label>
         </v-flex>
       </v-layout>
-      <v-layout>
-        <v-flex md3 sm4 xs12 class="mr-2" v-for="(file,index) in files" v-bind:key="index">
+      <v-layout row wrap>
+        <v-flex md3 sm4 xs12 class="mr-2 mb-2" v-for="(file,index) in files" v-bind:key="index">
           <v-card>
             <v-card-media
               :src="file.image"
@@ -130,7 +130,7 @@
             </v-card-media>
           </v-card>
         </v-flex>
-        <v-flex md3 sm4 xs12 style="min-height: 150px;border: 2px dashed #00897B;background:rgba(244, 244, 246, 0.47);" >
+        <v-flex md3 sm4 xs12 style="min-height: 150px;border: 2px dashed #00897B;background:rgba(244, 244, 246, 0.47);">
           <v-card-actions class="layout align-center justify-center fill-height">
             <v-btn fab outline color="primary" @click="onPickFile">
               <v-icon>add</v-icon>

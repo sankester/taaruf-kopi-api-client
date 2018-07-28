@@ -3,18 +3,20 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'Admin Ta`aruf Kopi',
+    title: 'Website Ta`aruf Kopi',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'api client fot taaruf api server' }
+      { hid: 'description', name: 'description', content: 'api client fot taaruf api server' },
+      { href:'https://fonts.googleapis.com/css?family=Material+Icons', rel : 'stylesheet'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   css : [
-    'vue-awesome-notifications/dist/styles/style.css'
+    'vue-awesome-notifications/dist/styles/style.css',
+    "vue-material-design-icons/styles.css"
   ],
   /*
   ** Customize the progress bar color
@@ -25,7 +27,7 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/vuetify',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
   ],
   // vuetify module config
   vuetify: {
