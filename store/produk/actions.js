@@ -47,5 +47,19 @@ export default {
     }
     //delete data produk from API Server
     return await this.$axios.$delete('/produk/' + id,  tokenHeaders)
-  }
+  },
+  // public
+  // get public list berita
+  async getPublicListProduk({ dispatch, commit, getters, rootGetters }) {
+    // set token additional header
+    let tokenHeaders = {
+      headers: { 'Authorization': "Bearer " + rootGetters.getToken }
+    }
+    // get data berita from API Server
+    await this.$axios.$get('/public/produk?include=user,files&keyword='+ rootGetters.getPublicKeywordProduk, tokenHeaders).then((res) => {
+      // commit data
+      commit('setPublicProduk', res.data)
+      commit('setPublicLastProdukPagination', res.meta.pagination)
+    })
+  },
 }

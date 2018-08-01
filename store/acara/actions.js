@@ -47,5 +47,19 @@ export default {
     }
     //delete data acara from API Server
     return await this.$axios.$delete('/acara/' + id,  tokenHeaders)
-  }
+  },
+  // public
+  // get public list berita
+  async getPublicListAcara({ dispatch, commit, getters, rootGetters }) {
+    // set token additional header
+    let tokenHeaders = {
+      headers: { 'Authorization': "Bearer " + rootGetters.getToken }
+    }
+    // get data berita from API Server
+    await this.$axios.$get('/public/acara?include=user,files&keyword='+ rootGetters.getPublicKeywordAcara, tokenHeaders).then((res) => {
+      // commit data
+      commit('setPublicAcara', res.data)
+      commit('setPublicLastAcaraPagination', res.meta.pagination)
+    })
+  },
 }

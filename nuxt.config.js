@@ -11,7 +11,7 @@ module.exports = {
       { href:'https://fonts.googleapis.com/css?family=Material+Icons', rel : 'stylesheet'}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/icon.png' }
     ]
   },
   css : [
@@ -28,6 +28,7 @@ module.exports = {
   modules: [
     '@nuxtjs/vuetify',
     '@nuxtjs/axios',
+    ['@nuxtjs/pwa', { icon: true }],
   ],
   // vuetify module config
   vuetify: {
@@ -43,13 +44,45 @@ module.exports = {
   axios: {
     baseURL : process.env.BASE_URL || 'http://api.taaruf-kopi.com/api/'
   },
+  workbox: {
+    runtimeCaching: [
+      {
+        // Should be a regex string. Compiles into new RegExp('https://my-cdn.com/.*')
+        urlPattern: 'http://taaruf-kopi.com/api//.*',
+        // Defaults to `networkFirst` if omitted
+        handler: 'cacheFirst',
+        // Defaults to `GET` if omitted
+        method: 'GET',
+        strategyOptions: {
+          cacheName: 'taaruf-kopi-cache',
+          cacheExpiration: {
+            maxEntries: 10,
+            maxAgeSeconds: 300
+          }
+        }
+      }
+    ]
+  },
+  meta: [
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'mobile-web-app-capable', content: 'true' },
+    { name: 'apple-mobile-web-app-capable', content: 'true' },
+    { hid: 'description', name: 'description', content: 'api client fot taaruf api server' },
+    { href:'https://fonts.googleapis.com/css?family=Material+Icons', rel : 'stylesheet'}
+  ],
   // Plugin Config
   plugins: [
     {src: '~plugins/vee-validate.js', ssr: true},
     {src: '~plugins/vue-awesome-notification.js', ssr: false},
     {src: '~plugins/confirm-dialog.js', ssr :false},
     {src: '~plugins/use-component.js', ssr :false},
+    {src: '~plugins/use-filter.js', ssr :  false},
   ],
+  manifest: {
+    name: 'Taaruf Kopi App',
+    lang: 'fa'
+  },
   /*
   ** Build configuration
   */
@@ -68,6 +101,7 @@ module.exports = {
       //   })
       // }
     },
+
     vendor:['axios','vee-validate','js-cookie']
   },
   env : {
@@ -75,6 +109,7 @@ module.exports = {
     client_secret : 'XXDSLS2OP2css0bUJBfN0wpNjEkrLl4ABxmAgJQS',
     grant_type : 'password',
     scope : '*',
-    BASE_URL : 'http://api.taaruf-kopi.com/api/'
+    BASE_URL : 'http://api.taaruf-kopi.com/api/',
+    DOMAIN_URL : 'http://api.taaruf-kopi.com/'
   }
 }

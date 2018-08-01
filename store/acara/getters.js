@@ -14,5 +14,18 @@ export default  {
   // get keyword
   getKeywordAcara(state){
     return state.keyword
-  }
+  },
+  //public
+  // get token
+  getListPublicAcara(state){
+    return state.listPublic
+  },
+  // get pagination
+  getPublicAcaraPagination(state){
+    return state.paginationPublic
+  },
+  // get keyword
+  getPublicKeywordAcara(state){
+    return state.keywordPublic
+  },
 }

@@ -17,5 +17,7 @@ export default {
     links: []
   },
   // keyword search profil
-  keyword : ''
+  keyword : '',
+  // public profil
+  listPublic : []
 }

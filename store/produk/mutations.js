@@ -25,5 +25,25 @@ export default {
         state.list.splice(index, 1)
       }
     })
-  }
+  },
+  // public
+  // set berita
+  setPublicProduk(state, list){
+    state.listPublic= list
+  },
+  // set last page
+  setPublicLastProdukPagination(state, pagination){
+    state.paginationPublic = pagination
+  },
+  // update list
+  updatePublicListProduk(state, list){
+    // loop
+    list.forEach(function(element) {
+      state.listPublic.push(element)
+    });
+  },
+  // set keyword
+  setPublicKeywordProduk(state, keyword){
+    state.keywordPublic = keyword
+  },
 }

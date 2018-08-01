@@ -7,10 +7,12 @@
             <img src="~assets/img/web/logo-kopi-taaruf.png" height="50px" width="165px" class="mb-2">
           </div>
           <div class="layout row justify-center align-center">
-            <v-icon class="mr-2" small>place</v-icon> Kawedanan block C no.8 Salaman - Magelang, Jawa Tengah  &nbsp;|&nbsp;  <v-icon class="mx-2" small>phone</v-icon>  0857-2990-5023
+            <span>
+               <v-icon class="mr-2" small>place</v-icon> Kawedanan block C no.8 Salaman - Magelang, Jawa Tengah  &nbsp;|&nbsp;  <v-icon class="mx-2" small>phone</v-icon>  0857-2990-5023
+            </span>
           </div>
           <no-ssr>
-            <div class="layout row justify-center align-center">
+            <div class="layout row wrap justify-center align-center">
               <v-btn icon flat>
                 <facebook class="v-icon" />
               </v-btn>
@@ -26,7 +28,8 @@
             <span class="copy-text">
               Copyright © 2018
               <a href="#">Ta`aruf Kopi</a> &nbsp; | &nbsp;  All Rights Reserved &nbsp; | &nbsp;  Designed By <a
-              href="#">Ach. Vani Ardiansyah</a></span>
+              href="#">Ach. Vani Ardiansyah</a>
+            </span>
           </div>
         </v-flex>
       </v-layout>

@@ -14,5 +14,10 @@ export default  {
   // get keyword
   getKeywordProfil(state){
     return state.keyword
-  }
+  },
+  //public
+  // get token
+  getListPublicProfil(state){
+    return state.listPublic
+  },
 }

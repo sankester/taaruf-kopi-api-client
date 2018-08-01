@@ -1,14 +1,29 @@
 <template>
   <v-toolbar fixed app :style="getColor" dark height="65px" :class="getClass" clipped >
     <v-toolbar-title>
-      <v-avatar tile class="top--logo">
-        <img src="~assets/img/web/logo-kopi-taaruf.png" alt="">
-      </v-avatar>
+      <nuxt-link to="/" style="text-decoration: none">
+        <v-avatar tile class="top--logo">
+          <img src="~assets/img/web/logo-kopi-taaruf.png" alt="">
+        </v-avatar>
+      </nuxt-link>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat exact nuxt to="/" >Home</v-btn>
-      <v-btn flat exact nuxt to="/profil">Profil</v-btn>
+      <v-menu
+        bottom
+        origin="center center"
+        transition="scale-transition"
+        offset-y
+        open-on-hover
+      >
+        <v-btn flat slot="activator">Profil</v-btn>
+        <v-list :style="getStyleMenuItem">
+          <v-list-tile exact nuxt :to="'/profil/'+ profil.id" v-for="(profil ,index) in dataProfil" :key="index">
+            <v-list-tile-title class="white--text">{{profil.nama_profil}}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
       <v-btn flat exact nuxt to="/berita">Berita</v-btn>
       <v-btn flat exact nuxt to="/acara">Acara</v-btn>
       <v-btn flat exact nuxt to="/produk">Produk</v-btn>
@@ -24,6 +39,28 @@
 
       }
     },
+    mounted(){
+      // get data user from API server
+      this.$store.dispatch("getPublicListProfil").catch(error => {
+        // default error message
+        let errorMessage = "Gagal mengambil data";
+        // cek response error
+        if (error.response) {
+          // set 401 error message
+          if (error.response.status == 401) {
+            errorMessage = "<h4>Anda tidak mempunyai akses.</h4>";
+          } else if(error.response.status == 405){
+            // get error data
+            errorMessage = '<h4>Method tidak diperbolehkan.</h4>'
+          } else{
+            // set server error message
+            errorMessage = "<h4>Server sedang jalan-jalan.</h4>";
+          }
+        }
+        // show error message
+        this.$awn.alert(errorMessage);
+      })
+    },
     computed : {
       getClass(){
         // cek navbar transparent
@@ -35,6 +72,16 @@
       },
       getColor(){
         return 'background-color: ' + this.$store.getters.getNavbarClassColor
+      },
+      dataProfil(){
+        return this.$store.getters.getListPublicProfil
+      },
+      getStyleMenuItem(){
+        if(this.$store.getters.isHome == true){
+          return 'background-color: rgba(128, 128, 128, 0.5) !important;'
+        }else{
+          return 'background-color: black !important;'
+        }
       }
     }
   }

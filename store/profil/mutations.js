@@ -21,5 +21,10 @@ export default {
   // delete
   deleteProfil(state, profil){
     state.list.splice(state.list.indexOf(profil), 1)
-  }
+  },
+  // public
+  // set profil
+  setPublicProfil(state, list){
+    state.listPublic= list
+  },
 }

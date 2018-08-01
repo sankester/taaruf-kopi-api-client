@@ -28,5 +28,9 @@ export default  {
   // nav bar class color
   navbarClassColor : '',
   // set is home
-  isHome : false
+  isHome : false,
+  // set data sidebar public
+  sidebarAcara : [],
+  sidebarBerita : [],
+  sidebarProduk : []
 }

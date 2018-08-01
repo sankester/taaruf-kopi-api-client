@@ -20,5 +20,19 @@ export default {
     links: []
   },
   // keyword search produk
-  keyword : ''
+  keyword : '',
+  // public
+  // list public
+  listPublic : [],
+  // keyword public
+  keywordPublic : '',
+  // pagination public
+  paginationPublic : {
+    total: 0,
+    count: 0,
+    per_page: 0,
+    current_page: 0,
+    total_pages: 0,
+    links: []
+  }
 }

@@ -170,7 +170,7 @@
           })
         );
       },
-      // load moredata user from API server
+      // load more data user from API server
       loadMore(link) {
         // show loading button
         this.loadingButton = true;

@@ -36,5 +36,15 @@ export default  {
   },
   getIsHome(state){
     return state.isHome
+  },
+  // get sidebar data
+  getSidebarBerita(state){
+    return state.sidebarBerita
+  },
+  getSidebarAcara(state){
+    return state.sidebarAcara
+  },
+  getSidebarProduk(state){
+    return state.sidebarProduk
   }
 }

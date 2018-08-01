@@ -14,5 +14,18 @@ export default  {
   // get keyword
   getKeywordProduk(state){
     return state.keyword
-  }
+  },
+  //public
+  // get token
+  getListPublicProduk(state){
+    return state.listPublic
+  },
+  // get pagination
+  getPublicProdukPagination(state){
+    return state.paginationPublic
+  },
+  // get keyword
+  getPublicKeywordProduk(state){
+    return state.keywordPublic
+  },
 }

@@ -45,5 +45,15 @@ export default {
   // set is home
   setIsHome(state, status){
     state.isHome = status
+  },
+  // set data sidebar public
+  setSidebarAcara(state , list){
+    state.sidebarAcara = list
+  },
+  setSidebarBerita(state, list){
+    state.sidebarBerita = list
+  },
+  setSidebarProduk(state, list){
+    state.sidebarProduk = list
   }
 }

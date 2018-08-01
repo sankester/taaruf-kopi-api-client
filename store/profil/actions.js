@@ -47,5 +47,18 @@ export default {
     }
     //delete data profil from API Server
     return await this.$axios.$delete('/profil/' + id,  tokenHeaders)
-  }
+  },
+  // public
+  // get public list berita
+  async getPublicListProfil({ dispatch, commit, getters, rootGetters }) {
+    // set token additional header
+    let tokenHeaders = {
+      headers: { 'Authorization': "Bearer " + rootGetters.getToken }
+    }
+    // get data berita from API Server
+    await this.$axios.$get('/public/profil', tokenHeaders).then((res) => {
+      // commit data
+      commit('setPublicProfil', res.data)
+    })
+  },
 }

@@ -24,12 +24,7 @@
       <template slot="no-data" class="justify-center align-center layout">
         <v-layout align-center justify-center fill-height row wrap class="py-2">
           <v-flex md12 lg12 xs12 sm12>
-            <v-alert
-              :value="true"
-              color="info"
-              icon="info"
-              outline
-            >
+            <v-alert :value="true" color="info" icon="info" outline>
               Data belum tersedia, klik tombol tambah berita untuk menambah data atau klik tombol load data jika ingin mengambil data terbaru dari server.
             </v-alert>
           </v-flex>
