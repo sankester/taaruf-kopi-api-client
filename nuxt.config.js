@@ -52,7 +52,7 @@ module.exports = {
     runtimeCaching: [
       {
         // Should be a regex string. Compiles into new RegExp('https://my-cdn.com/.*')
-        urlPattern: 'http://taaruf-kopi.com/api//.*',
+        urlPattern: 'http://taaruf-kopi.cleverapps.io/.*',
         // Defaults to `networkFirst` if omitted
         handler: 'cacheFirst',
         // Defaults to `GET` if omitted
