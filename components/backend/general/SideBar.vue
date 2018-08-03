@@ -23,8 +23,8 @@
     <v-list class="pt-2" dense>
       <v-divider></v-divider>
       <!--looping menu-->
-      <template v-for="item in items">
-        <v-list-tile :key="item.title" :to="item.to" class="mx-1 py-1">
+      <template v-for="(item,index) in items">
+        <v-list-tile :key="index" :to="item.to" class="mx-1 py-1">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -32,7 +32,7 @@
             <v-list-tile-title>{{ item.title }}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <div class="px-2 my-1">
+        <div class="px-2 my-1" :key="item.to" >
           <v-divider></v-divider>
         </div>
       </template>

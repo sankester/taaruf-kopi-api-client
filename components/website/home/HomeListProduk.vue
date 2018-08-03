@@ -18,7 +18,7 @@
             <div class="v-picker--full-width ">Stok &nbsp;:&nbsp; {{ produk.stok}}</div>
             <no-ssr>
               <div>
-                Deskripsi : {{produk.deskripsi_produk.replace(/(<([^>]+)>)/ig, '') | truncate(100)}}
+                Deskripsi : {{produk.deskripsi_produk | strip_tag | truncate(100)}}
               </div>
             </no-ssr>
           </div>

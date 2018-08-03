@@ -26,9 +26,9 @@
           <v-alert dismissible v-model="alert.status" :type="alert.type">
             {{ alert.message }}
             <ul>
-              <template v-for="(items, index) in alert.errors">
-                <template v-for="item in items">
-                  <li>
+              <template v-for="items in alert.errors">
+                <template v-for="(item,index) in items">
+                  <li :key="index">
                     {{item}}
                   </li>
                 </template>
@@ -36,7 +36,7 @@
             </ul>
           </v-alert>
         </v-container>
-        <v-tabs left  color="transparent"class="mt-2" style="min-height: 200px">
+        <v-tabs left  color="transparent" class="mt-2" style="min-height: 200px">
           <v-tabs-slider color="primary"></v-tabs-slider>
           <v-tab href="#tab-1">
             <v-icon class="mr-1">person</v-icon>Profil User

@@ -20,7 +20,7 @@
               <v-icon small class="mr-1" color="black">person</v-icon> {{ berita.user.data.nama}}
             </span>
             <br>
-            <span>{{berita.isi_berita.replace(/(<([^>]+)>)/ig, '') |  truncate(100)}}</span>
+            <span>{{berita.isi_berita | strip_tag |  truncate(100)}}</span>
           </div>
         </v-card-title>
         <v-card-actions>

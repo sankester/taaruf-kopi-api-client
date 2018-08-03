@@ -12,7 +12,7 @@
       <template>
         <v-subheader>Hari Ini</v-subheader>
         <!--notification list-->
-        <v-list-tile avatar @click="">
+        <v-list-tile avatar>
           <v-list-tile-avatar>
             <img src="https://pbs.twimg.com/profile_images/698219286947467264/ujW41nG3_400x400.jpg">
           </v-list-tile-avatar>
@@ -25,7 +25,7 @@
             <v-icon color="green">check_circle</v-icon>
           </v-list-tile-action>
         </v-list-tile>
-        <v-list-tile avatar @click="" class="list--unread">
+        <v-list-tile avatar class="list--unread">
           <v-list-tile-avatar>
             <v-icon class="icon--rounder" dark>person_add</v-icon>
           </v-list-tile-avatar>

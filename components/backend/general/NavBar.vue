@@ -42,7 +42,7 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
       <v-list>
-        <v-list-tile @click="">
+        <v-list-tile>
           <v-list-tile-action>
             <v-icon>notifications</v-icon>
           </v-list-tile-action>

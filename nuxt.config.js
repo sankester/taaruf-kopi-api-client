@@ -28,6 +28,10 @@ module.exports = {
   modules: [
     '@nuxtjs/vuetify',
     '@nuxtjs/axios',
+    ['@nuxtjs/component-cache', {
+      max: 10000,
+      maxAge: 1000 * 60 * 60
+    }],
     ['@nuxtjs/pwa', { icon: true }],
   ],
   // vuetify module config
@@ -92,14 +96,14 @@ module.exports = {
     ** Run ESLint on save
     */
     extend (config, { isDev, isClient }) {
-      // if (isDev && isClient) {
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //     test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/
-      //   })
-      // }
+      if (isDev && isClient) {
+        config.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules)/
+        })
+      }
     },
 
     vendor:['axios','vee-validate','js-cookie']

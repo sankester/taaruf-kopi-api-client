@@ -26,9 +26,9 @@
           <v-alert dismissible v-model="alert.status" :type="alert.type" >
             {{ alert.message }}
             <ul>
-              <template v-for="(items, index) in alert.errors">
-                <template v-for="item in items">
-                  <li>
+              <template v-for="items in alert.errors">
+                <template v-for="(item,index) in items">
+                  <li :key="index">
                     {{item}}
                   </li>
                 </template>

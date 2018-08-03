@@ -178,7 +178,9 @@
           this.isMobile = window.innerWidth < 600;
         }
       },
+      // handle on scroll mouse
       handleScroll () {
+        // cek process in browser
         if (process.browser) {
           if (typeof window !== "undefined") {
             let windowsPosition = window.scrollY

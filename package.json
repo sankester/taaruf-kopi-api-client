@@ -4,6 +4,12 @@
   "description": "Client project for taaruf kopi API server",
   "author": "Ach. Vani Ardiansyah <sankesterfire@gmail.com>",
   "private": true,
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "4000"
+    }
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -14,6 +20,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
+    "@nuxtjs/component-cache": "^1.1.2",
     "@nuxtjs/pwa": "^2.0.8",
     "@nuxtjs/vuetify": "^0.4.2",
     "axios": "^0.18.0",

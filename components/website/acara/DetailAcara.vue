@@ -16,7 +16,7 @@
             <br>
             <p>
               <v-icon small color="red" class="mr-2">web</v-icon>
-              {{ acara.deskripsi_acara.replace(/(<([^>]+)>)/ig, '') | truncate(100)}}
+              {{ acara.deskripsi_acara| strip_tag | truncate(100)}}
             </p>
           </div>
         </v-card-title>

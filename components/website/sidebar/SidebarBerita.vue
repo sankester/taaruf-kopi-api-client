@@ -39,7 +39,7 @@
                     </div>
                     <div>
                       <p :class="(isMobile) ? 'mb-0 pb-0': ''">
-                        {{ berita.isi_berita.replace(/(<([^>]+)>)/ig, '') | truncate(100) }}
+                        {{ berita.isi_berita | strip_tag| truncate(100) }}
                       </p>
                     </div>
                   </div>

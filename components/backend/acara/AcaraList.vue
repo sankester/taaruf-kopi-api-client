@@ -12,7 +12,7 @@
           </v-btn>
         </td>
         <td class="justify-center align-center layout px-0">
-          <v-btn flat icon small  small color="info" nuxt :to="'acara/' + props.item.id">
+          <v-btn flat icon small color="info" nuxt :to="'acara/' + props.item.id">
             <v-icon small dark>edit</v-icon>
           </v-btn>
           <v-btn flat icon small color="error" >

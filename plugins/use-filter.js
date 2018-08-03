@@ -7,3 +7,7 @@ Vue.filter('truncate', (string, value) => {
   return (string || '')
 })
 
+Vue.filter('strip_tag', (string) => {
+ return string.replace(/(<([^>]+)>)/ig, '')
+})
+
