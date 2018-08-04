@@ -32,5 +32,7 @@ export default  {
   // set data sidebar public
   sidebarAcara : [],
   sidebarBerita : [],
-  sidebarProduk : []
+  sidebarProduk : [],
+  // cors host
+  corsHost : ''
 }

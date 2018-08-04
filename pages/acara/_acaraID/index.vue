@@ -80,28 +80,40 @@
     components : {
       SidebarBerita, SidebarProduk
     },
-    async asyncData({params,store}) {
+    middleware : ['set-host'],
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       // get data acara
-      const res = await axios.get(process.env.BASE_URL + 'public/acara/' + params.acaraID +'?include=user,files', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+      const res = await axios.get(process.env.BASE_URL + 'public/acara/' + context.params.acaraID +'?include=user,files', {
+        headers:headers
       }).then((response) => {
         return response.data
       })
       // get sidebar acara
       const resBerita = await axios.get(process.env.BASE_URL + 'public/berita/limit/3', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+        headers:headers
       }).then((response) => {
         return response.data
       })
       // get sidebar produk
       const resProduk = await axios.get(process.env.BASE_URL + 'public/produk/limit/3', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+        headers:headers
       }).then((response) => {
         return response.data
       })
       // set data sidebar
-      store.commit('setSidebarBerita', resBerita.data)
-      store.commit('setSidebarProduk', resProduk.data)
+      context.store.commit('setSidebarBerita', resBerita.data)
+      context.store.commit('setSidebarProduk', resProduk.data)
       // response data
       return {
         acara : res.data

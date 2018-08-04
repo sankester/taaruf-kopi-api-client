@@ -76,16 +76,28 @@
     components: {
       ListProduk
     },
-    async asyncData({store}) {
+    middleware : ['set-host'],
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       // get data produk
       const res = await axios.get(process.env.BASE_URL + 'public/produk?include=user,files', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+        headers: headers
       }).then((response) => {
         return response.data
       })
       // commit data
-      store.commit('setPublicProduk', res.data)
-      store.commit('setPublicLastProdukPagination', res.meta.pagination)
+      context.store.commit('setPublicProduk', res.data)
+      context.store.commit('setPublicLastProdukPagination', res.meta.pagination)
     },
     data: () => ({
       // breadcumb data

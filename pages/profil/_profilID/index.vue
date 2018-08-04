@@ -53,10 +53,22 @@
     components : {
       SidebarProfil
     },
-    async asyncData({params,store}) {
+    middleware : ['set-host'],
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       // get data profil
-      const res = await axios.get(process.env.BASE_URL + 'public/profil/' + params.profilID +'?include=user', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+      const res = await axios.get(process.env.BASE_URL + 'public/profil/' + context.params.profilID +'?include=user', {
+        headers: headers
       }).then((response) => {
         return response.data
       })

@@ -51,15 +51,26 @@
   export default {
     name: "edit-acara",
     layout: "admin",
-    middleware: ["check-auth", "auth"],
+    middleware: ["set-host","check-auth", "auth"],
     components: {FormAcara},
-    async asyncData({store, params}) {
-      const res = await axios.get(process.env.BASE_URL + 'acara/' + params.acaraID + '?include=files', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
+      const res = await axios.get(process.env.BASE_URL + 'acara/' + context.params.acaraID + '?include=files', {
+        headers: headers
       }).then((response) => {
         return response.data
       })
-      // grt data respose
+      // get data respose
       let resData = res.data
       let resFile = res.data.files.data
       // reformate acara

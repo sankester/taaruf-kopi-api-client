@@ -50,11 +50,22 @@
   export default {
     name: "edit-user",
     layout: "admin",
-    middleware: ["check-auth", "auth"],
+    middleware: ["set-host","check-auth", "auth"],
     components: {FormProfil},
-    async asyncData({params , store}){
-      const res = await axios.get(process.env.BASE_URL + 'profil/' + params.profilID ,{
-        headers: { 'Authorization': "Bearer " + store.getters.getToken }
+    async asyncData(context){
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
+      const res = await axios.get(process.env.BASE_URL + 'profil/' + context.params.profilID ,{
+        headers: headers
       }).then( response  => {
           return response.data
       })

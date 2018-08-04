@@ -46,5 +46,9 @@ export default  {
   },
   getSidebarProduk(state){
     return state.sidebarProduk
+  },
+  // get cors host
+  getCorsHost(state){
+    return state.corsHost
   }
 }

@@ -51,11 +51,22 @@
   export default {
     name: "edit-produk",
     layout: "admin",
-    middleware: ["check-auth", "auth"],
+    middleware: ["set-host","check-auth", "auth"],
     components: {FormProduk},
-    async asyncData({store, params}) {
-      const res = await axios.get( process.env.BASE_URL + 'produk/' + params.produkID + '?include=files' , {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
+      const res = await axios.get( process.env.BASE_URL + 'produk/' + context.params.produkID + '?include=files' , {
+        headers:headers
       }).then(response => {
          return response.data
       })

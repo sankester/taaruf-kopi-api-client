@@ -104,10 +104,22 @@
     components: {
       HomeListBerita, HomeListAcara, HomeListProduk
     },
+    middleware : ['set-host'],
     // async load data
-    async asyncData({store}) {
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       const res = await axios.get(process.env.BASE_URL + 'public/home', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+        headers: headers
       }).then((response) => {
         return response.data.data
       })

@@ -47,15 +47,17 @@
                   <v-divider color="teal" class="mt-3"></v-divider>
                   <div class="ml-0">
                     <v-btn flat color="error" small v-if="produk.diskon != '0'" class="ml-0 pk-0">
-                      <v-icon class="mr-2 ml-0" small>local_offer</v-icon>  Diskon &nbsp;{{ produk.diskon }}
-                    </v-btn> &nbsp;|&nbsp;
-                    <v-btn flat color="info" small v-if="produk.diskon != '0'">
+                      <v-icon class="mr-2 ml-0" small>local_offer</v-icon>  Diskon &nbsp;{{ produk.diskon }} %
+                    </v-btn>
+                    <div  v-if="produk.diskon != '0'" >
+                      &nbsp;|&nbsp;
+                    </div>
+                    <v-btn flat color="info" small>
                       <v-icon class="mr-2" small>storage</v-icon>  Stok &nbsp; {{ produk.stok}}
                     </v-btn>
                   </div>
                   <div v-html="produk.deskripsi_produk" class="my-1" style="font-size: 20px !important;">
                   </div>
-
                   <div class="v-picker--full-width mb-0 pb-0" style="font-size: 25px; line-height: 30px">
                     <div :class="getClassHarga(produk)">Rp.&nbsp;{{ produk.harga}}</div>
                     <div v-html="getDiskonHarga(produk)"> &nbsp;</div>
@@ -86,10 +88,22 @@
   export default {
     name: "DetailProduk",
     layout: 'website',
-    async asyncData({params,store}) {
+    middleware : ['set-host'],
+    async asyncData(context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       // get data produk
-      const res = await axios.get(process.env.BASE_URL + 'public/produk/' + params.produkID +'?include=user,files', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+      const res = await axios.get(process.env.BASE_URL + 'public/produk/' + context.params.produkID +'?include=user,files', {
+        headers: headers
       }).then((response) => {
         return response.data
       })

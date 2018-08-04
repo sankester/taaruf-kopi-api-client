@@ -141,5 +141,11 @@ export default {
       // commit list recent into vuex
       vuexContext.commit('setDasboardData', res)
     })
+  },
+  async initHost(vuexContext, req){
+    // get host
+    let host = req ? req.headers.host : window.location.host
+    // conmmit set token
+    vuexContext.commit('setCorsHost', host)
   }
 }

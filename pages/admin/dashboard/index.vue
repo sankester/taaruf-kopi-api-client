@@ -79,15 +79,26 @@
   export default {
     name: "index",
     layout: 'admin',
-    middleware : ['check-auth','auth'],
+    middleware : ['set-host','check-auth','auth'],
     components: {
       MiniStatistic, ListAcara, ListBerita
     },
-    async asyncData ({store}) {
+    async asyncData (context) {
+      // set headers
+      let headers = {
+        'Authorization': "Bearer " + context.store.getters.getToken,
+      }
+      // cek proses
+      if (process.server){
+        // get host cors
+        let corsHost = context.store.getters.getCorsHost
+        // add cors host to header
+        headers = {...headers, "Origin": corsHost}
+      }
       const res = await axios.get( process.env.BASE_URL + 'dashboard', {
-        headers: {'Authorization': "Bearer " + store.getters.getToken}
+        headers: headers
       })
-      store.commit('setDasboardData', res.data)
+      context.store.commit('setDasboardData', res.data)
       return true
     },
     computed :{

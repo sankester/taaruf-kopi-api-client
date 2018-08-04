@@ -55,5 +55,8 @@ export default {
   },
   setSidebarProduk(state, list){
     state.sidebarProduk = list
+  },
+  setCorsHost(state, host){
+    state.corsHost = host
   }
 }
