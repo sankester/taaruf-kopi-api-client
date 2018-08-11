@@ -28,6 +28,23 @@
       <v-btn flat exact nuxt to="/acara">Acara</v-btn>
       <v-btn flat exact nuxt to="/produk">Produk</v-btn>
     </v-toolbar-items>
+    <!--mobile navbar-->
+    <v-menu offset-y class="hidden-md-and-up">
+      <v-btn icon slot="activator">
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+      <v-list>
+        <v-list-tile exact nuxt to="/berita">
+          <v-list-tile-title>Berita</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile exact nuxt to="/acara">
+          <v-list-tile-title>Acara</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile exact nuxt to="/produk">
+          <v-list-tile-title>Produk</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
   </v-toolbar>
 </template>
 
