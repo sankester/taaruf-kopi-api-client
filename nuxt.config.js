@@ -46,7 +46,7 @@ module.exports = {
   },
   // axios module config
   axios: {
-    baseURL : process.env.BASE_URL || 'http://api.taaruf-kopi.com/api/'
+    baseURL : process.env.BASE_URL || 'https://api.taaruf-kopi.com/api/'
   },
   workbox: {
     runtimeCaching: [
@@ -113,7 +113,7 @@ module.exports = {
     client_secret : 'XXDSLS2OP2css0bUJBfN0wpNjEkrLl4ABxmAgJQS',
     grant_type : 'password',
     scope : '*',
-    BASE_URL : 'http://api.taaruf-kopi.com/api/',
-    DOMAIN_URL : 'http://api.taaruf-kopi.com/'
+    BASE_URL : 'https://api.taaruf-kopi.com/api/',
+    DOMAIN_URL : 'https://api.taaruf-kopi.com/'
   }
 }
